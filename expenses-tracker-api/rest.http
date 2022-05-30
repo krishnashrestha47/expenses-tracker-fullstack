@@ -1,0 +1,9 @@
+### create user api endpoint
+POST http://localhost:8000/api/v1/users
+Content-Type: application/json
+
+{
+    "name": "Krishna Shrestha",
+    "email": "krish_sth2005@yahoo.com",
+    "password": "abc123"
+}
