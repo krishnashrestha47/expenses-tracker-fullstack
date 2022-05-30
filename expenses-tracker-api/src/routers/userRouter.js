@@ -2,10 +2,22 @@ import express from "express";
 
 const router = express.Router();
 
-//create a user
+// get user
+router.get("/", (req, res) => {
+  console.log(req.body);
+  res.send("get user");
+});
 
-// login user
+//register a user
+router.post("/", (req, res) => {
+  console.log(req.body);
+  res.send("register user");
+});
 
-//get user
+//login user
+router.post("/login", (req, res) => {
+  console.log(req.body);
+  res.send("login user");
+});
 
 export default router;
