@@ -1,13 +1,20 @@
-import { Button } from "react-bootstrap";
 import "./App.css";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
+import { Dashboard } from "./pages/Dashboard";
 
 function App() {
   return (
     <div>
-      <h1>Hello World</h1>
-      <Button variant="warning">
-        Hello <i class="fa-brands fa-react"></i>
-      </Button>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
