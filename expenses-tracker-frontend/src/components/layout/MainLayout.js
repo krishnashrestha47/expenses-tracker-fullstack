@@ -1,4 +1,5 @@
 import React from "react";
+import { Container } from "react-bootstrap";
 import { TopNav } from "./TopNav";
 
 export const MainLayout = ({ children }) => {
@@ -7,7 +8,9 @@ export const MainLayout = ({ children }) => {
       {/* header */}
       <TopNav />
       {/* dynamic content */}
-      <main className="main"> {children} </main>
+      <main className="main">
+        <Container>{children}</Container>
+      </main>
 
       {/* footer */}
 

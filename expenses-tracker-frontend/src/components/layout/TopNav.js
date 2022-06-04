@@ -1,5 +1,8 @@
 import React from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar, NavLink } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
+
 export const TopNav = () => {
   return (
     <Navbar bg="info" expand="md">
@@ -8,8 +11,12 @@ export const TopNav = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="/">Login</Nav.Link>
-            <Nav.Link href="/register">Register</Nav.Link>
+            <LinkContainer to="/">
+              <Nav.Link>Login</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/register">
+              <NavLink>Register</NavLink>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Container>
