@@ -1,10 +1,11 @@
 import React from "react";
 import { MainLayout } from "../components/layout/MainLayout";
+import { Register } from "../components/register/Register";
 
 export const RegisterPage = () => {
   return (
     <MainLayout>
-      <h1>Register Page</h1>
+      <Register />
     </MainLayout>
   );
 };
