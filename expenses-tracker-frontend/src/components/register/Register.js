@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+const initialState = {
+  name: "",
+  email: "",
+  password: "",
+};
 export const Register = () => {
+  const [formDt, setFormDt] = useState(initialState);
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setFormDt({
+      ...formDt,
+      [name]: value,
+    });
+  };
+  console.log(formDt);
+
   return (
     <Row className="login-comp mt-5">
       <Form>
@@ -10,15 +26,30 @@ export const Register = () => {
         <hr />
         <Form.Group className="mb-3" controlId="formGroupEmail">
           <Form.Label>Full Name</Form.Label>
-          <Form.Control type="name" placeholder="Enter Full Name" />
+          <Form.Control
+            onChange={handleOnChange}
+            type="text"
+            name="name"
+            placeholder="Enter Full Name"
+          />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formGroupEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control
+            onChange={handleOnChange}
+            type="email"
+            name="email"
+            placeholder="Enter email"
+          />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formGroupPassword">
           <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <Form.Control
+            onChange={handleOnChange}
+            type="password"
+            name="password"
+            placeholder="Password"
+          />
         </Form.Group>
         <Button variant="success">Register</Button>
         <div className="text-end">
