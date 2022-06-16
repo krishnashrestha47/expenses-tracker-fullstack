@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
-import { Button, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import img from "../../assets/img.jpeg";
 import { postLogin } from "../../helpers/axiosHelper";
 
 export const Login = () => {
@@ -33,28 +34,43 @@ export const Login = () => {
 
   return (
     <Row className="login-comp mt-5">
-      <Form>
-        <h3>Welcome Back</h3>
-        <hr />
-        <Form.Group className="mb-3" controlId="formGroupEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control ref={emailRef} type="email" placeholder="Enter email" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formGroupPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            ref={passwordRef}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Group>
-        <Button onClick={handleOnSubmit} variant="primary">
-          Login
-        </Button>
-        <div className="text-end">
-          New here? <Link to="/register">Register</Link>
-        </div>
-      </Form>
+      <Col className="col-5">
+        <h2 className="fs-2 text-primary text-center">
+          Keep track of your spending !
+        </h2>
+        <img src={img} alt="Image" />
+      </Col>
+      <Col className="col-1">
+        <div className="vertical-line"></div>
+      </Col>
+      <Col className="col-6">
+        <Form>
+          <h3>Welcome Back</h3>
+          <hr />
+          <Form.Group className="mb-3" controlId="formGroupEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              ref={emailRef}
+              type="email"
+              placeholder="Enter email"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formGroupPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              ref={passwordRef}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Group>
+          <Button onClick={handleOnSubmit} variant="primary">
+            Login
+          </Button>
+          <div className="text-end">
+            New here? <Link to="/register">Register</Link>
+          </div>
+        </Form>
+      </Col>
     </Row>
   );
 };

@@ -5,7 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 
 export const TopNav = () => {
   return (
-    <Navbar bg="info" expand="md">
+    <Navbar variant="dark" bg="primary" expand="md">
       <Container>
         <Navbar.Brand href="/">Expenses Tracker</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

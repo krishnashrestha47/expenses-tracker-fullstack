@@ -4,13 +4,27 @@
 
 .login-comp {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
 
 .login-comp form {
-  background: rgba(5, 97, 143, 0.3);
+  background: rgba(31, 10, 187, 0.379);
   padding: 1rem;
   border-radius: 5px;
   width: 400px;
+  box-shadow: 5px 10px 8px #7d69cc;
+}
+
+.login-comp img {
+  height: 400px;
+  width: auto;
+}
+
+.vertical-line {
+  border-left: 2px dotted rgb(86, 86, 167);
+  height: 500px;
+  position: absolute;
+  left: 50%;
+  top: 10%;
 }
