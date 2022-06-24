@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img from "../../assets/img.jpeg";
 import { postLogin } from "../../helpers/axiosHelper";
 
 export const Login = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -23,10 +24,12 @@ export const Login = () => {
     setLoading(false);
     console.log(data);
 
-    //if login success, store user data in session storage and redirect to dashboard page
     if (data.status === "success") {
       const { name, email, _id } = data.user;
+
+      //if login success, store user data in session storage and redirect to dashboard page
       sessionStorage.setItem("user", JSON.stringify({ name, email, _id }));
+      navigate("/dashboard");
     }
     //else show the error message
     setError(data.message);
@@ -34,16 +37,17 @@ export const Login = () => {
 
   return (
     <Row className="login-comp mt-5">
-      <Col className="col-5">
+      <Col className="col-12 col-md-6">
         <h2 className="fs-2 text-primary text-center">
           Keep track of your spending !
+          <hr />
         </h2>
         <img src={img} alt="Image" />
       </Col>
-      <Col className="col-1">
+      <Col className="col-0 col-md-1">
         <div className="vertical-line"></div>
       </Col>
-      <Col className="col-6">
+      <Col className="col-12 col-md-6 d-flex justify-content-center">
         <Form>
           <h3>Welcome Back</h3>
           <hr />

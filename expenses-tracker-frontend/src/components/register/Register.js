@@ -39,7 +39,7 @@ export const Register = () => {
         <h2 className="fs-2 text-primary text-center">
           Keep track of your spending !
         </h2>
-        <img src={img} alt="Image" />
+        <img src={img} alt="expenses tracker" />
       </Col>
       <Col className="col-1">
         <div className="vertical-line"></div>
