@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import img from "../../assets/img.jpeg";
 import { postLogin } from "../../helpers/axiosHelper";
@@ -29,6 +29,7 @@ export const Login = () => {
 
       //if login success, store user data in session storage and redirect to dashboard page
       sessionStorage.setItem("user", JSON.stringify({ name, email, _id }));
+      setError("");
       navigate("/dashboard");
     }
     //else show the error message
@@ -51,6 +52,9 @@ export const Login = () => {
         <Form>
           <h3>Welcome Back</h3>
           <hr />
+
+          {loading && <Spinner animation="border" variant="primary" />}
+          {error && <Alert variant="danger">{error}</Alert>}
           <Form.Group className="mb-3" controlId="formGroupEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
