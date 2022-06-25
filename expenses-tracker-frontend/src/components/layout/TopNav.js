@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { Button, Container, Nav, Navbar, NavLink } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useNavigationType } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 import { useState } from "react";
 
 export const TopNav = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState();
 
   useEffect(() => {
@@ -12,6 +13,11 @@ export const TopNav = () => {
 
     setUser(userInfo);
   }, []);
+
+  const handleOnLogout = () => {
+    sessionStorage.removeItem("user");
+    navigate("/");
+  };
 
   return (
     <Navbar variant="dark" bg="primary" expand="md">
@@ -23,7 +29,9 @@ export const TopNav = () => {
             {user?._id ? (
               <>
                 Welcome {user.name} {"   "}
-                <Button variant="dark">Logout</Button>
+                <Button variant="dark" onClick={handleOnLogout}>
+                  Logout
+                </Button>
               </>
             ) : (
               <>
