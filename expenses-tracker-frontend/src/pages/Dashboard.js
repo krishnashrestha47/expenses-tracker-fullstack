@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ExpensesForm } from "../components/expenses-form/ExpensesForm";
 import { MainLayout } from "../components/layout/MainLayout";
 
 export const Dashboard = () => {
@@ -12,7 +13,11 @@ export const Dashboard = () => {
 
   return (
     <div>
-      <MainLayout>Dashboard</MainLayout>
+      <MainLayout>
+        <div>Dashboard</div>
+        <hr />
+        <ExpensesForm />
+      </MainLayout>
     </div>
   );
 };
