@@ -39,6 +39,7 @@ export const Register = () => {
         <h2 className="fs-2 text-primary text-center">
           Keep track of your spending !
         </h2>
+        <hr />
         <img src={img} alt="expenses tracker" />
       </Col>
       <Col className="col-1">

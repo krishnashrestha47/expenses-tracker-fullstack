@@ -22,7 +22,6 @@ export const Login = () => {
     setLoading(true);
     const { data } = await postLogin({ email, password });
     setLoading(false);
-    console.log(data);
 
     if (data.status === "success") {
       const { name, email, _id } = data.user;
@@ -38,17 +37,17 @@ export const Login = () => {
 
   return (
     <Row className="login-comp mt-5">
-      <Col className="col-12 col-md-6">
+      <Col className="col-md-5">
         <h2 className="fs-2 text-primary text-center">
           Keep track of your spending !
-          <hr />
         </h2>
+        <hr />
         <img src={img} alt="Image" />
       </Col>
-      <Col className="col-0 col-md-1">
+      <Col className="col-md-1">
         <div className="vertical-line"></div>
       </Col>
-      <Col className="col-12 col-md-6 d-flex justify-content-center">
+      <Col className="col-md-6 d-flex justify-content-center">
         <Form>
           <h3>Welcome Back</h3>
           <hr />

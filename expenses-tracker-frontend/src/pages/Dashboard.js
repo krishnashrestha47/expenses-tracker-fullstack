@@ -8,7 +8,7 @@ export const Dashboard = () => {
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
     if (!user?._id) navigate("/");
-  }, []);
+  }, [navigate]);
 
   return (
     <div>
