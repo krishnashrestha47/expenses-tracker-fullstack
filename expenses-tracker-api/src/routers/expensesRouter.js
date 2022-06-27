@@ -11,22 +11,19 @@ router.get("/", (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    console.log(req.body);
-    const result = await createExpense(req.body);
+    const { authorization } = req.headers;
+    const result = await createExpense({ ...req.body, userId: authorization });
 
     result?._id
       ? res.json({
           status: "success",
           message: "Expenses created successfully",
+          result,
         })
       : res.json({
           status: "error",
           message: "Error creating the expenses, try again later",
         });
-
-    res.json({
-      message: "Welcome to the expenses API post",
-    });
   } catch (error) {
     console.log(error);
     res.json({

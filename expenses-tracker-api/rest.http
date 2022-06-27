@@ -30,9 +30,10 @@ GET http://localhost:8000/api/v1/expenses
 ### post expenses
 POST http://localhost:8000/api/v1/expenses
 Content-Type: application/json
+Authorization: 629619fc4183760f79236c14
 
 {
-    "name": "Food",
+    "name": "Grocery",
     "amount": 100,
     "date": "2022-06-27"
 }
