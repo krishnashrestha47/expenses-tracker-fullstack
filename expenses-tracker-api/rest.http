@@ -20,3 +20,15 @@ Content-Type: application/json
     "email": "krish_sth2005@yahoo.com",
     "password": "abc123"
 }
+
+
+# ====== expenses API ======
+
+###get expenses
+GET http://localhost:8000/api/v1/expenses
+
+### post expenses
+POST http://localhost:8000/api/v1/expenses
+Content-Type: application/json
+### delete expenses
+DELETE  http://localhost:8000/api/v1/expenses
