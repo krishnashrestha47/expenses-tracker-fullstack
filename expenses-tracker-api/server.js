@@ -17,7 +17,10 @@ dbConnection();
 
 // APIs
 import userRouter from "./src/routers/userRouter.js";
+import expensesRouter from "./src/routers/expensesRouter.js";
+
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/expenses", expensesRouter);
 
 app.get("*", (req, res) => {
   res.status(404).send("<h1>404 Not Found</h1>");
