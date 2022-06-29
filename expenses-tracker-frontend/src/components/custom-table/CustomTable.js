@@ -22,7 +22,7 @@ export const CustomTable = () => {
       </ListGroup.Item>
       <ListGroup.Item
         action
-        variant="warning"
+        variant="success"
         className=" d-flex justify-content-between mt-4 fw-bold"
       >
         <span className="title">TV Shopping</span>

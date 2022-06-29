@@ -22,7 +22,7 @@ export const ExpensesForm = () => {
           <Form.Control type="date" placeholder="Date" />
         </Col>
         <Col md="1">
-          <Button type="date" placeholder="Date">
+          <Button variant="primary" type="submit">
             Add
           </Button>
         </Col>
