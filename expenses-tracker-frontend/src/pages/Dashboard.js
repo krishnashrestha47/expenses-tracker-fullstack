@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { Alert, Col, Row, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { CustomTable } from "../components/custom-table/CustomTable";
 import { ExpensesForm } from "../components/expenses-form/ExpensesForm";
@@ -37,6 +38,16 @@ export const Dashboard = () => {
       <MainLayout>
         <div>Dashboard</div>
         <hr />
+        <Row className="mb-3">
+          <Col>
+            {isLoading && <Spinner variant="primary" animation="border" />}
+            {resp?.message && (
+              <Alert variant={resp.status === "success" ? "success" : "danger"}>
+                {resp.message}
+              </Alert>
+            )}
+          </Col>
+        </Row>
         <ExpensesForm handleOnPost={handleOnPost} />
         <CustomTable />
       </MainLayout>
