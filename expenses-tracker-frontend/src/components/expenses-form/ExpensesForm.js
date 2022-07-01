@@ -7,7 +7,7 @@ const initialState = {
   date: "",
 };
 
-export const ExpensesForm = () => {
+export const ExpensesForm = ({ handleOnPost }) => {
   const [formDt, setFormDt] = useState(initialState);
 
   const handleOnChange = (e) => {
@@ -22,6 +22,7 @@ export const ExpensesForm = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    handleOnPost(formDt);
     console.log(formDt);
   };
 

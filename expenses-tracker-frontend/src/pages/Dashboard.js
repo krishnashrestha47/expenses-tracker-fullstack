@@ -1,23 +1,43 @@
 import React, { useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CustomTable } from "../components/custom-table/CustomTable";
 import { ExpensesForm } from "../components/expenses-form/ExpensesForm";
 import { MainLayout } from "../components/layout/MainLayout";
+import { postExpense } from "../helpers/axiosHelper";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
+
+  const [resp, setResp] = useState({
+    status: "",
+    message: "",
+  });
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
     if (!user?._id) navigate("/");
   }, [navigate]);
 
+  const handleOnPost = async (formDt) => {
+    console.log("submit", formDt);
+    setIsLoading(true);
+    const data = await postExpense(formDt);
+    setIsLoading(false);
+    setResp(data);
+    //call the api
+  };
+
+  console.log(resp);
+
   return (
     <div>
       <MainLayout>
         <div>Dashboard</div>
         <hr />
-        <ExpensesForm />
+        <ExpensesForm handleOnPost={handleOnPost} />
         <CustomTable />
       </MainLayout>
     </div>
