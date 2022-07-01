@@ -33,7 +33,12 @@ export const postLogin = (formDt) => {
 
 export const postExpense = async (formDt) => {
   try {
-    const { data } = await axios.post(expensesAPI, formDt);
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const { data } = await axios.post(expensesAPI, formDt, {
+      headers: {
+        Authorization: user._id,
+      },
+    });
     return data;
   } catch (error) {
     console.log(error);
