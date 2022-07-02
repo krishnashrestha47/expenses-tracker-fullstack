@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { CustomTable } from "../components/custom-table/CustomTable";
 import { ExpensesForm } from "../components/expenses-form/ExpensesForm";
 import { MainLayout } from "../components/layout/MainLayout";
-import { getExpense, postExpense } from "../helpers/axiosHelper";
+import { deleteExpense, getExpense, postExpense } from "../helpers/axiosHelper";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -43,6 +43,13 @@ export const Dashboard = () => {
     //call the api
   };
 
+  const handleOnDelete = async (_id) => {
+    if (!window.confirm("Are you sure you want to delete?")) return;
+    const data = await deleteExpense(_id);
+    data.status === "success" && fetchExpenses();
+    setResp(data);
+  };
+
   console.log(expenses);
 
   return (
@@ -61,7 +68,7 @@ export const Dashboard = () => {
           </Col>
         </Row>
         <ExpensesForm handleOnPost={handleOnPost} />
-        <CustomTable expenses={expenses} />
+        <CustomTable handleOnDelete={handleOnDelete} expenses={expenses} />
       </MainLayout>
     </div>
   );

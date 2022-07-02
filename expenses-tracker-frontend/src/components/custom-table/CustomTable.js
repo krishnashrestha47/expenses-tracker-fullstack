@@ -1,7 +1,7 @@
 import React from "react";
-import { ListGroup } from "react-bootstrap";
+import { Button, ListGroup } from "react-bootstrap";
 
-export const CustomTable = ({ expenses }) => {
+export const CustomTable = ({ expenses, handleOnDelete }) => {
   return (
     <ListGroup variant="flush" className="mt-5 fs-3">
       {expenses.map((item, i) => (
@@ -13,7 +13,12 @@ export const CustomTable = ({ expenses }) => {
         >
           <span className="title">{item.name}</span>
           <span className="date">{item.date}</span>
-          <span className="cost">${item.amount}</span>
+          <span className="cost">
+            ${item.amount} {""}
+            <Button variant="danger" onClick={() => handleOnDelete(item._id)}>
+              <i className="fa-solid fa-trash"></i>
+            </Button>
+          </span>
         </ListGroup.Item>
       ))}
 

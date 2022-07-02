@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createExpense,
+  deleteExpenses,
   getExpenses,
 } from "../models/expensesModel/Expenses.Model.js";
 
@@ -47,10 +48,31 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/", (req, res) => {
-  res.json({
-    message: "Welcome to the expenses API delete",
-  });
+router.delete("/:_id", async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const { authorization } = req.headers; // user id
+
+    const data = await deleteExpenses({
+      _id,
+      userId: authorization,
+    });
+
+    data?._id
+      ? res.json({
+          status: "success",
+          message: "Expense deleted successfully",
+        })
+      : res.json({
+          status: "error",
+          message: "Expense delete failed",
+        });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
 });
 
 export default router;
