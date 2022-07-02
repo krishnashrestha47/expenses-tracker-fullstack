@@ -60,7 +60,7 @@ export const Dashboard = () => {
           </Col>
         </Row>
         <ExpensesForm handleOnPost={handleOnPost} />
-        <CustomTable />
+        <CustomTable expenses={expenses} />
       </MainLayout>
     </div>
   );
