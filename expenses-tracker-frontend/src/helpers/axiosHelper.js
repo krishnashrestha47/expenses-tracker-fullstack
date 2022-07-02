@@ -5,6 +5,8 @@ const userApi = rootUrl + "/users";
 const loginApi = rootUrl + "/users/login";
 const expensesAPI = rootUrl + "/expenses";
 
+//====== user APIs
+
 export const postRegister = (formDt) => {
   try {
     return axios.post(userApi, formDt);
@@ -31,12 +33,30 @@ export const postLogin = (formDt) => {
   }
 };
 
-// ===expenses api
+// ===== expenses api
 
 export const postExpense = async (formDt) => {
   try {
     const user = JSON.parse(sessionStorage.getItem("user"));
     const { data } = await axios.post(expensesAPI, formDt, {
+      headers: {
+        Authorization: user._id,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+    return {
+      status: "error",
+      message: error.message,
+    };
+  }
+};
+
+export const getExpense = async () => {
+  try {
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    const { data } = await axios.get(expensesAPI, {
       headers: {
         Authorization: user._id,
       },

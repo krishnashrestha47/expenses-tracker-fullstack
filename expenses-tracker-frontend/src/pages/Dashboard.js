@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { CustomTable } from "../components/custom-table/CustomTable";
 import { ExpensesForm } from "../components/expenses-form/ExpensesForm";
 import { MainLayout } from "../components/layout/MainLayout";
-import { postExpense } from "../helpers/axiosHelper";
+import { getExpense, postExpense } from "../helpers/axiosHelper";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -16,14 +16,25 @@ export const Dashboard = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
-    if (!user?._id) navigate("/");
+    if (!user?._id) {
+      navigate("/");
+    }
+    fetchExpenses();
   }, [navigate]);
+
+  const fetchExpenses = async () => {
+    const data = await getExpense();
+    console.log(data);
+    data?.status === "success" && setExpenses(data.expenses);
+  };
 
   const handleOnPost = async (formDt) => {
     console.log("submit", formDt);
+
     setIsLoading(true);
     const data = await postExpense(formDt);
     setIsLoading(false);
@@ -31,7 +42,7 @@ export const Dashboard = () => {
     //call the api
   };
 
-  console.log(resp);
+  console.log(expenses);
 
   return (
     <div>
