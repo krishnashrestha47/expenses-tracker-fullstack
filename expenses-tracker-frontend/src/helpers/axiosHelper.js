@@ -31,6 +31,8 @@ export const postLogin = (formDt) => {
   }
 };
 
+// ===expenses api
+
 export const postExpense = async (formDt) => {
   try {
     const user = JSON.parse(sessionStorage.getItem("user"));
@@ -43,10 +45,8 @@ export const postExpense = async (formDt) => {
   } catch (error) {
     console.log(error);
     return {
-      data: {
-        status: "error",
-        message: error.message,
-      },
+      status: "error",
+      message: error.message,
     };
   }
 };

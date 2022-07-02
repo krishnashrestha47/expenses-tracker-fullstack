@@ -18,7 +18,6 @@ export const ExpensesForm = ({ handleOnPost }) => {
       [name]: value,
     });
   };
-  console.log(formDt);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
