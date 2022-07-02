@@ -39,6 +39,7 @@ export const Dashboard = () => {
     const data = await postExpense(formDt);
     setIsLoading(false);
     setResp(data);
+    data.status === "success" && fetchExpenses();
     //call the api
   };
 
