@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, ListGroup } from "react-bootstrap";
-
 export const CustomTable = ({ expenses, handleOnDelete }) => {
   return (
     <ListGroup variant="flush" className="mt-5 fs-3">

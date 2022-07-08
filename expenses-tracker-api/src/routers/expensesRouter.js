@@ -10,7 +10,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   try {
     const { authorization } = req.headers;
-    //MOdel- get all expenses of userId - authorization
+    //Model- get all expenses of userId - authorization
     const expenses = await getExpenses({ userId: authorization });
     res.json({
       status: "success",
