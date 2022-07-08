@@ -4,15 +4,22 @@ import { Link } from "react-router-dom";
 import { postRegister } from "../../helpers/axiosHelper";
 import img from "../../assets/img.jpeg";
 
+import { useDispatch, useSelector } from "react-redux";
+import { isLoadingPending, setResponse } from "./userSlice";
+
 const initialState = {
   name: "",
   email: "",
   password: "",
 };
 export const Register = () => {
+  const dispatch = useDispatch();
+
   const [formDt, setFormDt] = useState(initialState);
-  const [isLoading, setIsLoading] = useState(false);
-  const [res, setRes] = useState({});
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [res, setRes] = useState({});
+
+  const { res, isLoading } = useSelector((state) => state.user);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -25,12 +32,14 @@ export const Register = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    // setIsLoading(true);
+    dispatch(isLoadingPending(true));
 
     //call api using axios
     const { data } = await postRegister(formDt);
-    setRes(data);
-    setIsLoading(false);
+    // setRes(data);
+    dispatch(setResponse(data));
+    // setIsLoading(false);
   };
 
   return (
