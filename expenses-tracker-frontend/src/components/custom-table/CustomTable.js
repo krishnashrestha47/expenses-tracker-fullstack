@@ -1,23 +1,20 @@
 import React from "react";
-import { Button, ListGroup } from "react-bootstrap";
+import { Button, Col, ListGroup, Row } from "react-bootstrap";
 export const CustomTable = ({ expenses, handleOnDelete }) => {
   return (
     <ListGroup variant="flush" className="mt-5 fs-3">
       {expenses.map((item, i) => (
-        <ListGroup.Item
-          key={i}
-          action
-          variant="warning"
-          className=" d-flex justify-content-between"
-        >
-          <span className="title">{item.name}</span>
-          <span className="date">{item.date}</span>
-          <span className="cost">
-            ${item.amount} {""}
-            <Button variant="danger" onClick={() => handleOnDelete(item._id)}>
-              <i className="fa-solid fa-trash"></i>
-            </Button>
-          </span>
+        <ListGroup.Item key={i} action variant="warning">
+          <Row className=" d-flex justify-content-between">
+            <Col className="md-6 title">{item.name}</Col>
+            <Col className="text-end md-4 date">{item.date.substr(0, 10)}</Col>
+            <Col className="text-end md-2 cost">
+              ${item.amount} {""}
+              <Button variant="danger" onClick={() => handleOnDelete(item._id)}>
+                <i className="fa-solid fa-trash"></i>
+              </Button>
+            </Col>
+          </Row>
         </ListGroup.Item>
       ))}
 
