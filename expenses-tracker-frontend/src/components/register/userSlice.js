@@ -17,14 +17,22 @@ export const userSlice = createSlice({
       state.isLoading = true;
     },
     setResponse: (state, action) => {
-      state.res = action.payload;
       state.isLoading = false;
+      state.res = action.payload;
+    },
+    loginSuccessResponse: (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+      //   state.res = {
+      //     status: "",
+      //     message: "",
+      //   };
     },
   },
 });
 
 const { actions, reducer } = userSlice;
 
-export const { isLoadingPending, setResponse } = actions;
+export const { isLoadingPending, setResponse, loginSuccessResponse } = actions;
 
 export default reducer;

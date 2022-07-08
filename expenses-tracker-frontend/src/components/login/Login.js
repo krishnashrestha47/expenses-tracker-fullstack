@@ -3,11 +3,22 @@ import { Alert, Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import img from "../../assets/img.jpeg";
 import { postLogin } from "../../helpers/axiosHelper";
+import {
+  isLoadingPending,
+  setResponse,
+  loginSuccessResponse,
+} from "../register/userSlice";
+
+import { useDispatch, useSelector } from "react-redux";
 
 export const Login = () => {
+  const dispatch = useDispatch();
+
+  const { res, isLoading } = useSelector((state) => state.user);
+
   const navigate = useNavigate();
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState("");
+  // const [loading, setLoading] = useState(false);
 
   const emailRef = useRef("");
   const passwordRef = useRef("");
@@ -19,20 +30,23 @@ export const Login = () => {
     if (!email || !password) {
       return alert("Please enter your email and password");
     }
-    setLoading(true);
+    // setLoading(true);
+    dispatch(isLoadingPending(true));
     const { data } = await postLogin({ email, password });
-    setLoading(false);
+    // setLoading(false);
 
     if (data.status === "success") {
       const { name, email, _id } = data.user;
+      dispatch(loginSuccessResponse(data.user));
 
       //if login success, store user data in session storage and redirect to dashboard page
       sessionStorage.setItem("user", JSON.stringify({ name, email, _id }));
-      setError("");
+      // setError("");
       navigate("/dashboard");
     }
     //else show the error message
-    setError(data.message);
+    // setError(data.message);
+    dispatch(setResponse(data));
   };
 
   return (
@@ -52,8 +66,8 @@ export const Login = () => {
           <h3>Welcome Back</h3>
           <hr />
 
-          {loading && <Spinner animation="border" variant="primary" />}
-          {error && <Alert variant="danger">{error}</Alert>}
+          {isLoading && <Spinner animation="border" variant="primary" />}
+          {res?.message && <Alert variant="danger">{res.message}</Alert>}
           <Form.Group className="mb-3" controlId="formGroupEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
