@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { handleOnPost } from "../../pages/dashboard/dashboardAction";
 
 const initialState = {
   name: "",
@@ -7,7 +9,8 @@ const initialState = {
   date: "",
 };
 
-export const ExpensesForm = ({ handleOnPost }) => {
+export const ExpensesForm = () => {
+  const dispatch = useDispatch();
   const [formDt, setFormDt] = useState(initialState);
 
   const handleOnChange = (e) => {
@@ -21,8 +24,7 @@ export const ExpensesForm = ({ handleOnPost }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    handleOnPost(formDt);
-    console.log(formDt);
+    dispatch(handleOnPost(formDt));
   };
 
   return (
