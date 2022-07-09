@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Col, ListGroup, Row } from "react-bootstrap";
-export const CustomTable = ({ expenses, handleOnDelete }) => {
+
+import { fetchExpenses } from "../../pages/dashboard/dashboardAction";
+import { useSelector, useDispatch } from "react-redux";
+
+export const CustomTable = ({ handleOnDelete }) => {
+  const dispatch = useDispatch();
+  const { expenses } = useSelector((state) => state.dashboard);
+
+  useEffect(() => {
+    dispatch(fetchExpenses());
+  }, []);
+
   return (
     <ListGroup variant="flush" className="mt-5 fs-3">
       {expenses.map((item, i) => (

@@ -19,42 +19,36 @@ export const Dashboard = () => {
     message: "",
   });
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [expenses, setExpenses] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [expenses, setExpenses] = useState([]);
 
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
     if (!user?._id) {
       navigate("/");
     }
-    fetchExpenses();
+    // fetchExpenses();
   }, [navigate]);
-
-  const fetchExpenses = async () => {
-    const data = await getExpense();
-    console.log(data);
-    data?.status === "success" && setExpenses(data.expenses);
-  };
 
   const handleOnPost = async (formDt) => {
     console.log("submit", formDt);
 
-    setIsLoading(true);
+    // setIsLoading(true);
     const data = await postExpense(formDt);
-    setIsLoading(false);
+    // setIsLoading(false);
     setResp(data);
-    data.status === "success" && fetchExpenses();
+    // data.status === "success" && fetchExpenses();
     //call the api
   };
 
   const handleOnDelete = async (_id) => {
     if (!window.confirm("Are you sure you want to delete?")) return;
     const data = await deleteExpense(_id);
-    data.status === "success" && fetchExpenses();
+    // data.status === "success" && fetchExpenses();
     setResp(data);
   };
 
-  console.log(expenses);
+  // console.log(expenses);
 
   return (
     <div>
@@ -63,7 +57,7 @@ export const Dashboard = () => {
         <hr />
         <Row className="mb-3">
           <Col>
-            {isLoading && <Spinner variant="primary" animation="border" />}
+            {/* {isLoading && <Spinner variant="primary" animation="border" />} */}
             {resp?.message && (
               <Alert variant={resp.status === "success" ? "success" : "danger"}>
                 {resp.message}
@@ -72,7 +66,7 @@ export const Dashboard = () => {
           </Col>
         </Row>
         <ExpensesForm handleOnPost={handleOnPost} />
-        <CustomTable handleOnDelete={handleOnDelete} expenses={expenses} />
+        <CustomTable handleOnDelete={handleOnDelete} />
       </MainLayout>
     </div>
   );
