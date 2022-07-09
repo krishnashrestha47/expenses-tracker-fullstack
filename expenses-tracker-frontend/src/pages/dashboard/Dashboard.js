@@ -2,10 +2,14 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Alert, Col, Row, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { CustomTable } from "../components/custom-table/CustomTable";
-import { ExpensesForm } from "../components/expenses-form/ExpensesForm";
-import { MainLayout } from "../components/layout/MainLayout";
-import { deleteExpense, getExpense, postExpense } from "../helpers/axiosHelper";
+import { CustomTable } from "../../components/custom-table/CustomTable";
+import { ExpensesForm } from "../../components/expenses-form/ExpensesForm";
+import { MainLayout } from "../../components/layout/MainLayout";
+import {
+  deleteExpense,
+  getExpense,
+  postExpense,
+} from "../../helpers/axiosHelper";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
