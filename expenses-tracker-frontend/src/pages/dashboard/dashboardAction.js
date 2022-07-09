@@ -1,5 +1,5 @@
 import { getExpense, postExpense } from "../../helpers/axiosHelper";
-import { requestPending, setExpenses } from "./dashboardSlice";
+import { requestPending, setExpenses, setResponse } from "./dashboardSlice";
 
 export const fetchExpenses = () => async (dispatch) => {
   const { status, expenses } = await getExpense();
@@ -10,6 +10,6 @@ export const fetchExpenses = () => async (dispatch) => {
 export const handleOnPost = (formDt) => async (dispatch) => {
   dispatch(requestPending(true));
   const data = await postExpense(formDt);
-  //   setResp(data);
+  dispatch(setResponse(data));
   data.status === "success" && dispatch(fetchExpenses());
 };

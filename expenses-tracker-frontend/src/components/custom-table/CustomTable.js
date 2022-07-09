@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { Button, Col, ListGroup, Row, Spinner } from "react-bootstrap";
+import { Alert, Button, Col, ListGroup, Row, Spinner } from "react-bootstrap";
 
 import { fetchExpenses } from "../../pages/dashboard/dashboardAction";
 import { useSelector, useDispatch } from "react-redux";
 
 export const CustomTable = ({ handleOnDelete }) => {
   const dispatch = useDispatch();
-  const { expenses, isLoading } = useSelector((state) => state.dashboard);
+  const { expenses, isLoading, res } = useSelector((state) => state.dashboard);
 
   useEffect(() => {
     dispatch(fetchExpenses());
@@ -15,6 +15,11 @@ export const CustomTable = ({ handleOnDelete }) => {
   return (
     <div variant="flush" className="mt-5 fs-3">
       {isLoading && <Spinner animation="border" variant="primary" />}
+      {res?.message && (
+        <Alert variant={res.status === "success" ? "success" : "danger"}>
+          {res.message}
+        </Alert>
+      )}
       <ListGroup>
         {expenses.map((item, i) => (
           <ListGroup.Item key={i} action variant="warning">
