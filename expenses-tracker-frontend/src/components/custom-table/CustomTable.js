@@ -52,7 +52,7 @@ export const CustomTable = () => {
                 {item.date.substr(0, 10)}
               </Col>
               <Col className="text-end md-2 cost">
-                ${item.amount} {""}
+                {item.type === "expenses" ? "-" : ""}${item.amount} {""}
                 <Button
                   variant="danger"
                   onClick={() => handleOnDelete([item._id])}

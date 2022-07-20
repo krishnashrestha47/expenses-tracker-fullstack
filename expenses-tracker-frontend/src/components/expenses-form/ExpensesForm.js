@@ -31,10 +31,10 @@ export const ExpensesForm = () => {
     <Form onSubmit={handleOnSubmit}>
       <Row className="g-3 bg-warning rounded pb-3 d-flex justify-content-center">
         <Col md="2">
-          <Form.Select type="text" placeholder="Last name">
+          <Form.Select required name="type" onChange={handleOnChange}>
             <option> --- transaction --- </option>
-            <option>Income</option>
-            <option>Expense</option>
+            <option value="income">Income</option>
+            <option value="expenses">Expense</option>
           </Form.Select>
         </Col>
         <Col md="4">
