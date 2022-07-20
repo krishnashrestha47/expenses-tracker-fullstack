@@ -1,16 +1,24 @@
 import React, { useEffect } from "react";
 import { Alert, Button, Col, ListGroup, Row, Spinner } from "react-bootstrap";
 
-import { fetchExpenses } from "../../pages/dashboard/dashboardAction";
+import {
+  fetchExpenses,
+  handleOnDeleteExpenses,
+} from "../../pages/dashboard/dashboardAction";
 import { useSelector, useDispatch } from "react-redux";
 
-export const CustomTable = ({ handleOnDelete }) => {
+export const CustomTable = () => {
   const dispatch = useDispatch();
   const { expenses, isLoading, res } = useSelector((state) => state.dashboard);
 
   useEffect(() => {
     dispatch(fetchExpenses());
   }, []);
+
+  const handleOnDelete = async (ids) => {
+    if (!window.confirm("Are you sure you want to delete?")) return;
+    dispatch(handleOnDeleteExpenses(ids));
+  };
 
   return (
     <div variant="flush" className="mt-5 fs-3">
