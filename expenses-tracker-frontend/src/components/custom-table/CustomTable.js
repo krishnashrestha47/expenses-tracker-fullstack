@@ -10,13 +10,14 @@ import { useState } from "react";
 
 export const CustomTable = () => {
   const dispatch = useDispatch();
-  const { expenses } = useSelector((state) => state.dashboard);
+  const { expenses, res } = useSelector((state) => state.dashboard);
 
   const [ids, setIds] = useState([]);
 
   useEffect(() => {
     dispatch(fetchExpenses());
-  }, []);
+    res.status === "success" && setIds([]);
+  }, [res]);
 
   const handleOnDelete = async (ids) => {
     if (!window.confirm("Are you sure you want to delete?")) return;
@@ -36,7 +37,7 @@ export const CustomTable = () => {
     <div variant="flush" className="mt-5 fs-3">
       <ListGroup>
         {expenses.map((item, i) => (
-          <ListGroup.Item key={i} action variant="warning">
+          <ListGroup.Item key={item._id} action variant="warning">
             <Row className=" d-flex justify-content-between">
               <Col className="md-6 title">
                 <Form.Check
