@@ -1,13 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  Alert,
-  Button,
-  Col,
-  Form,
-  ListGroup,
-  Row,
-  Spinner,
-} from "react-bootstrap";
+import { Button, Col, Form, ListGroup, Row } from "react-bootstrap";
 
 import {
   fetchExpenses,
@@ -18,7 +10,7 @@ import { useState } from "react";
 
 export const CustomTable = () => {
   const dispatch = useDispatch();
-  const { expenses, isLoading, res } = useSelector((state) => state.dashboard);
+  const { expenses } = useSelector((state) => state.dashboard);
 
   const [ids, setIds] = useState([]);
 
@@ -42,12 +34,6 @@ export const CustomTable = () => {
 
   return (
     <div variant="flush" className="mt-5 fs-3">
-      {isLoading && <Spinner animation="border" variant="primary" />}
-      {res?.message && (
-        <Alert variant={res.status === "success" ? "success" : "danger"}>
-          {res.message}
-        </Alert>
-      )}
       <ListGroup>
         {expenses.map((item, i) => (
           <ListGroup.Item key={i} action variant="warning">

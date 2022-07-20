@@ -1,22 +1,14 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
 import { Alert, Col, Row, Spinner } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { CustomTable } from "../../components/custom-table/CustomTable";
 import { ExpensesForm } from "../../components/expenses-form/ExpensesForm";
 import { MainLayout } from "../../components/layout/MainLayout";
-import { deleteExpense } from "../../helpers/axiosHelper";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
-
-  const [resp, setResp] = useState({
-    status: "",
-    message: "",
-  });
-
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [expenses, setExpenses] = useState([]);
+  const { isLoading, res } = useSelector((state) => state.dashboard);
 
   useEffect(() => {
     const user = JSON.parse(sessionStorage.getItem("user"));
@@ -33,10 +25,10 @@ export const Dashboard = () => {
         <hr />
         <Row className="mb-3">
           <Col>
-            {/* {isLoading && <Spinner variant="primary" animation="border" />} */}
-            {resp?.message && (
-              <Alert variant={resp.status === "success" ? "success" : "danger"}>
-                {resp.message}
+            {isLoading && <Spinner variant="primary" animation="border" />}
+            {res?.message && (
+              <Alert variant={res.status === "success" ? "success" : "danger"}>
+                {res.message}
               </Alert>
             )}
           </Col>
