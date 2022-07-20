@@ -14,3 +14,7 @@ export const getExpenses = (filter) => {
 export const deleteExpenses = (filter) => {
   return ExpensesSchema.findOneAndDelete(filter);
 };
+
+export const deleteManyExpenses = (userId, itemIds) => {
+  return ExpensesSchema.deleteMany({ userId, _id: { $in: itemIds } });
+};
