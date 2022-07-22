@@ -1,5 +1,12 @@
 import React, { useEffect } from "react";
-import { Button, Col, Form, ListGroup, Row } from "react-bootstrap";
+import {
+  Button,
+  ButtonGroup,
+  Col,
+  Form,
+  ListGroup,
+  Row,
+} from "react-bootstrap";
 
 import {
   fetchExpenses,
@@ -13,6 +20,7 @@ export const CustomTable = () => {
   const { expenses, res } = useSelector((state) => state.dashboard);
 
   const [ids, setIds] = useState([]);
+  const [display, setDisplay] = useState("all");
 
   useEffect(() => {
     dispatch(fetchExpenses());
@@ -31,12 +39,52 @@ export const CustomTable = () => {
       : setIds(ids.filter((id) => id !== value));
   };
 
-  console.log(ids);
+  const incomeArg = expenses.filter((item) => item.type === "income");
+  const expenseArg = expenses.filter((item) => item.type === "expenses");
+
+  const transactions = {
+    all: expenses,
+    income: incomeArg,
+    expenses: expenseArg,
+  };
 
   return (
     <div variant="flush" className="mt-5 fs-3">
+      <div className="btn-group pb-3">
+        <ButtonGroup aria-label="Basic example">
+          <Button
+            variant="primary"
+            onClick={() => {
+              setDisplay("all");
+            }}
+          >
+            All
+          </Button>
+          <Button
+            variant="success"
+            onClick={() => {
+              setDisplay("income");
+            }}
+          >
+            Income
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => {
+              setDisplay("expenses");
+            }}
+          >
+            Expenses
+          </Button>
+        </ButtonGroup>
+      </div>
+
+      <div>
+        {display === "all" ? "All transactions" : `All ${display} transactions`}{" "}
+      </div>
+
       <ListGroup>
-        {expenses.map((item, i) => (
+        {transactions[display].map((item, i) => (
           <ListGroup.Item key={item._id} action variant="warning">
             <Row className=" d-flex justify-content-between">
               <Col className="md-6 title">
