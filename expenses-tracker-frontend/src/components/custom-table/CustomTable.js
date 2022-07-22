@@ -118,7 +118,13 @@ export const CustomTable = () => {
           className=" d-flex justify-content-between mt-4 fw-bold"
         >
           <span className="title">Total</span>
-          <span className="cost">$</span>
+          <span className="cost">
+            $
+            {expenses.reduce(
+              (a, b) => (b.type === "income" ? a + b.amount : a - b.amount),
+              0
+            )}
+          </span>
         </ListGroup.Item>
       </ListGroup>
       <div className="mt-2 text-end">
